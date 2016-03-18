@@ -14,6 +14,9 @@ gem 'rake'
 
 gem 'shotgun'
 
+gem 'dotenv'
+
+gem 'dropbox-sdk'
 group :test do
   gem 'shoulda-matchers'
   gem 'rack-test'
