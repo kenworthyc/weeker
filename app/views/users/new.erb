@@ -1,0 +1,10 @@
+<form action="/users" method="post">
+  <input type="text" name="user[first_name]" placeholder="First name" value="<%= @user.first_name %>">
+  <input type="text" name="user[last_name]" placeholder="Last name" value="<%= @user.last_name %>">
+  <br>
+  <input type="text" name="user[email]" placeholder="Email" value="<%= @user.email %>">
+  <br>
+  <input type="password" placeholder="Password" name="user[password]">
+  <br>
+  <input type="submit" value="Create account">
+</form>
