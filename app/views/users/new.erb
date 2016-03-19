@@ -8,3 +8,11 @@
   <br>
   <input type="submit" value="Create account">
 </form>
+
+<% if errors %>
+  <ul>
+  <% errors.each do |error| %>
+    <li><%= error %></li>
+  <% end %>
+  </ul>
+<% end %>
