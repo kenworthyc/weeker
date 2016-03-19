@@ -1,7 +1,9 @@
-class User < ActiveRecord::Base
-  # Remember to create a migration!
+require 'bcrypt'
+require 'faker'
 
+class User < ActiveRecord::Base
   include BCrypt
+
 
   validates :email, presence: true, uniqueness: true
   validates :first_name, presence: true
