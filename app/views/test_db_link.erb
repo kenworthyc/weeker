@@ -1,0 +1,12 @@
+<h1>Let's hook up your Dropbox</h1>
+<%if @user_id %>
+  <%= @user_id %>
+
+<% else %>
+<a id="db-button" href="/service" target='_blank'>SYNC THAT DROPBOX</a>
+<form id='secret-form' action='/service_create'>
+  YOUR SECRET CODE:
+  <input type="text" name="code">
+  <input id='code-butt' type="submit" value="DO IT">
+</form>
+<% end %>
