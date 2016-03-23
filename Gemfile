@@ -17,6 +17,10 @@ gem 'shotgun'
 
 gem 'dotenv'
 
+# Clockwork
+gem 'clockwork'
+gem 'daemons'
+
 gem 'dropbox-sdk'
 group :test do
   gem 'shoulda-matchers'
