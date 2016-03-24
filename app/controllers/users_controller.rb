@@ -16,7 +16,7 @@ post '/users/?' do
     session[:user_id] = @user.id
     redirect "/users/#{@user.id}"
   else
-    @user
+    #@user
     errors = @user.errors.full_messages
 
     erb :'users/new', locals: { errors: errors }
