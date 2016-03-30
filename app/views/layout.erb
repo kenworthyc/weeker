@@ -19,6 +19,16 @@
 </head>
 <body>
 <div class="container">
+<% if session[:user_id] %>
+  <ul id="main-nav">
+  <li>Welcome: <%= current_user.email %> |</li><li><form method="post" action="/sessions/<%= current_user.id %>" class="logout">
+  <input type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="logout" class="delete_button"></form></li>
+  <% else %>
+  <ul id="main-nav">
+    <li><a href="/users/new">Register</a> |</li> <li><a href="/sessions/new">Login</a></li>
+  </ul>
+  <% end %>
   <h2>Weeker</h2>
     <%= yield %>
 </div>

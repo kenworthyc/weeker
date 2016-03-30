@@ -1,0 +1,12 @@
+<div class="login-form">
+  <% if @error %>
+    <ul class="errors">
+      <li><%= @error.to_s %></li>
+    </ul>
+  <% end %>
+    <form name="login" method="POST" action="/sessions" class="delete_button">
+      <input type="text" name="email" placeholder="Email"><br>
+      <input type="password" name="password_plaintext" placeholder="Password"><br>
+      <input type="submit" value="LOGIN">
+  </form>
+</div>
