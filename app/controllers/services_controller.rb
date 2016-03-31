@@ -23,6 +23,6 @@ get '/twitter-authentication-return' do
 	puts session.inspect
 	puts session[:user_id]
 	get_twitter_access_token
-	# params[:oauth_verifier]
-	# params[:oauth_token]
+	params[:oauth_verifier]
+	params[:oauth_token]
 end
