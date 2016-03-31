@@ -7,13 +7,13 @@ get '/new' do
 end
 
 get '/service' do 
-  flow = DropboxOAuth2Flow.new( ENV['DROPBOX_KEY'],	ENV['DROPBOX_SECRET'], 'http://localhost:9393/service_create', session, :dropbox_token)
+  flow = dropbox_flow
   authorize_url = flow.start() 
   redirect to (authorize_url)
 end
 
 get '/service_create' do
-  flow = DropboxOAuth2Flow.new( ENV['DROPBOX_KEY'],	ENV['DROPBOX_SECRET'], 'http://localhost:9393/service_create', session, :dropbox_token)
+	flow = dropbox_flow
   @session = session
   @user_id = flow.finish(params)  
   erb :'test_db_link'
