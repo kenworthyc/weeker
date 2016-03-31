@@ -30,3 +30,8 @@ get '/twitter-authentication-return' do
 	store_twitter_access_token
 	redirect "/users/#{session[:user_id]}"
 end
+
+get '/test-tweet' do
+	send_tweet(User.find(session[:user_id]), "Weeker is now tweeting")
+	redirect "/users/#{session[:user_id]}"
+end
