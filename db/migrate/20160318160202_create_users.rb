@@ -5,6 +5,7 @@ class CreateUsers < ActiveRecord::Migration
         t.string :last_name
         t.string :email, null:false
         t.string :password_digest, null:false
+        t.string :dropbox_token
 
         t.timestamps
       end

@@ -1,11 +1,6 @@
 <h1>Let's hook up your Dropbox</h1>
-<%if @user_id %>
-  <%= @user_id %>
+<%if @user.dropbox_token %>
+  <%= @user.dropbox_token %>
 <% else %>
 <a id="db-button" href="/sources/dropbox" target='_blank'>SYNC THAT DROPBOX</a>
-<form id='secret-form' action='/sources/dropbox-complete'>
-  YOUR SECRET CODE:
-  <input type="text" name="code">
-  <input id='code-butt' type="submit" value="DO IT">
-</form>
 <% end %>
