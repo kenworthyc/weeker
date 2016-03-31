@@ -22,13 +22,18 @@
 	<li>Available (click to authorize)</li>
 	<li>
 		<ul>
-			<li><a href="/twitter-authenticate">Twitter</a></li>
-			<li><a href='/test-tweet'>Send a tweet</a></li>
+			<% if !destination.twitter_token %>
+				<li><a href="/twitter-authenticate">Twitter</a></li>
+			<% end %>
 		</ul>
 	</li>
 	<li>Authorized</li>
 	<li>
 		<ul>
+			<% if destination.twitter_token %>
+				<li><a href="/twitter-disable">Twitter</a></li>
+				<li><a href='/test-tweet'>Send a tweet</a></li>
+			<% end %>
 		</ul>
 	</li>	
 </ul>
