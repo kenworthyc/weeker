@@ -14,7 +14,10 @@ end
 get '/sources/dropbox-complete' do
 	flow = dropbox_flow
   @session = session
-  @user_id = flow.finish(params)  
+  user_token= flow.finish(params)  
+  Source.create(user_id:session[:user_id], dropbox_token:user_token[0]) 
+  user = User.find(session[:user_id])
+  @user_id = user.sources.first.dropbox_token
   erb :'sources/new'
 end
 
