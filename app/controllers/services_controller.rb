@@ -13,3 +13,16 @@ get '/service_create' do
   @user_id = flow.finish(params[:code])  
   erb :'test_db_link'
 end
+
+get '/twitter-authenticate' do
+	puts session[:user_id]
+	get_twitter_info
+end
+
+get '/twitter-authentication-return' do
+	puts session.inspect
+	puts session[:user_id]
+	get_twitter_access_token
+	# params[:oauth_verifier]
+	# params[:oauth_token]
+end

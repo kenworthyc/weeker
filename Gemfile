@@ -17,6 +17,7 @@ gem 'shotgun'
 gem 'simplecov'
 
 gem 'dotenv'
+gem 'oauth'
 
 # Clockwork
 gem 'clockwork'
