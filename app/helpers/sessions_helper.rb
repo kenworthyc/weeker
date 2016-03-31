@@ -16,7 +16,6 @@ helpers do
   def get_twitter_info
   	callback = 'http://localhost:9393/twitter-authentication-return'
 
-
 		request_token = get_consumer.get_request_token(oauth_callback: callback)
 		session[:request_token] = request_token
 		redirect request_token.authorize_url
