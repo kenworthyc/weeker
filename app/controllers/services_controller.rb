@@ -1,5 +1,9 @@
 require 'dropbox_sdk'
-flow = DropboxOAuth2FlowNoRedirect.new( '',  '')
+
+
+p"+++++++++++++++++++++++"
+p ENV['DROPBOX_KEY']
+p ENV['DROPBOX_SECRET']
 get '/new' do 
   erb :'test_db_link'
 end
