@@ -1,22 +1,21 @@
 require 'dropbox_sdk'
 
-#Dropbox Services
-
-get '/new' do 
-  erb :'test_db_link'
+get '/sources/new' do 
+  erb :'sources/new'
 end
 
-get '/service' do 
+#Dropbox Services
+get '/sources/dropbox' do 
   flow = dropbox_flow
   authorize_url = flow.start() 
   redirect to (authorize_url)
 end
 
-get '/service_create' do
+get '/sources/dropbox-complete' do
 	flow = dropbox_flow
   @session = session
   @user_id = flow.finish(params)  
-  erb :'test_db_link'
+  erb :'sources/new'
 end
 
 #Twitter Services
