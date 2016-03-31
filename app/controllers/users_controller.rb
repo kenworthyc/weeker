@@ -29,7 +29,8 @@ end
 
 get '/users/:id/?' do
     @user = User.find(params[:id])
+    @destination = Destination.find_by(user_id: @user.id)
     redirect "/" unless current_user.id == @user.id
 
-    erb :'users/show'
+    erb :'users/show', locals: {user: @user, destination: @destination}
 end
