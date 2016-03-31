@@ -15,14 +15,11 @@ get '/service_create' do
 end
 
 get '/twitter-authenticate' do
-	puts session[:user_id]
 	get_twitter_info
 end
 
 get '/twitter-authentication-return' do
-	puts session.inspect
-	puts session[:user_id]
 	get_twitter_access_token
-	params[:oauth_verifier]
-	params[:oauth_token]
+	store_twitter_access_token
+	redirect "/users/#{session[:user_id]}"
 end
