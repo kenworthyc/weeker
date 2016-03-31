@@ -15,6 +15,7 @@ get '/service_create' do
 end
 
 get '/twitter-authenticate' do
+	puts session[:user_id]
 	get_twitter_info
 end
 
