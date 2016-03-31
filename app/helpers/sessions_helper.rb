@@ -6,7 +6,7 @@ helpers do
   def get_twitter_info
   	base = 'https://twitter.com'
   	# callback = 'http://weekerapp.heroku.com/twitter-authentication-return'
-  	callback = 'http://127.0.0.1:9393/twitter-authentication-return'
+  	callback = 'http://localhost:9393/twitter-authentication-return'
 
   	consumer = OAuth::Consumer.new(ENV['TWITTER_KEY'],
 															 ENV['TWITTER_SECRET'],
@@ -21,8 +21,8 @@ helpers do
   def get_twitter_access_token
   	puts params
   	puts session[:request_token]
-  	# access_token = session[:request_token].get_access_token(oauth_verifier: params[:oauth_verifier])
-  	# puts access_token.inspect
+  	access_token = session[:request_token].get_access_token(oauth_verifier: params[:oauth_verifier])
+  	puts access_token.inspect
   end
 
 end
