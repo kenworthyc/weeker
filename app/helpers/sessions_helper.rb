@@ -5,17 +5,12 @@ helpers do
 
   def get_consumer
   	base = 'https://twitter.com'
-  	# callback = 'http://weekerapp.heroku.com/twitter-authentication-return'
-  	# callback = 'http://localhost:9393/twitter-authentication-return'
-
   	consumer = OAuth::Consumer.new(ENV['TWITTER_KEY'],
 															 ENV['TWITTER_SECRET'],
 															 { site: base } )
   end
 
   def get_twitter_info
-  	# callback = 'http://localhost:9393/twitter-authentication-return'
-
 		request_token = get_consumer.get_request_token(oauth_callback: ENV['TWITTER_CALLBACK'])
 		session[:request_token] = request_token
 		redirect request_token.authorize_url
