@@ -52,10 +52,10 @@ helpers do
     access_token = OAuth::AccessToken.new(get_consumer, tokens.twitter_token, tokens.twitter_secret)
 
     client = Twitter::REST::Client.new do |config|
-      config.consumer_key =ENV["TWITTER_KEY"]
-      config.consumer_secret=ENV["TWITTER_SECRET"]
-      config.access_token=access_token.token
-      config.access_token_secret=access_token.secret
+      config.consumer_key = ENV["TWITTER_KEY"]
+      config.consumer_secret = ENV["TWITTER_SECRET"]
+      config.access_token = access_token.token
+      config.access_token_secret = access_token.secret
     end
     client.update_with_media("Yet More fun with weeker:", 
       open('https://dl.dropboxusercontent.com/s/ephkiagrqgfc0y4/IMG_8489.JPG?dl=1'))
