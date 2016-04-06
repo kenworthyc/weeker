@@ -1,4 +1,6 @@
 require 'dropbox_sdk'
+require 'twitter'
+require 'open-uri'
 
 get '/sources/new' do 
   @user = current_user 
@@ -49,6 +51,7 @@ get '/twitter-authentication-return' do
 end
 
 get '/test-tweet' do
-	send_tweet(User.find(session[:user_id]), "Weeker is now tweeting")
-	redirect "/users/#{session[:user_id]}"
+  twitter_media_upload
+  # send_tweet(User.find(session[:user_id]), twitter_media_upload )
+  redirect "/users/#{session[:user_id]}"
 end
