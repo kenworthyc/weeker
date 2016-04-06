@@ -19,6 +19,7 @@ gem 'simplecov'
 gem 'dotenv'
 gem 'oauth'
 
+gem 'twitter'
 # Clockwork
 gem 'clockwork'
 gem 'daemons'

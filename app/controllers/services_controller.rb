@@ -1,4 +1,5 @@
 require 'dropbox_sdk'
+require 'twitter'
 
 get '/sources/new' do 
   @user = current_user 
@@ -15,7 +16,7 @@ end
 get '/sources/dropbox-complete' do
 	flow = dropbox_flow
   @session = session
-  user_token= flow.finish(params)  
+  user_token= flow.finish(params) 
   @user = current_user 
   @user.dropbox_token = user_token[0]
   @user.save
@@ -35,6 +36,6 @@ get '/twitter-authentication-return' do
 end
 
 get '/test-tweet' do
-	send_tweet(User.find(session[:user_id]), "Weeker is now tweeting")
+	send_tweet(User.find(session[:user_id]), twitter_media_upload )
 	redirect "/users/#{session[:user_id]}"
 end

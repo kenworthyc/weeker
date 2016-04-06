@@ -44,4 +44,13 @@ helpers do
   	access_token.post(base, update, options)
   end
 
+	def twitter_media_upload
+		client = Twitter::REST::Client.new do |config|
+			config.consumer_key =ENV["TWITTER_KEY"]
+			config.consumer_secret=ENV["TWITTER_SECRET"]
+			config.access_token=session[:access_token].token
+			config.access_token_secret=session[:access_token].secret
+		end
+		client.update_with_media("Here's what I did this week:", 'https://dl.dropboxusercontent.com/s/ephkiagrqgfc0y4/IMG_8489.JPG?raw=1')
+	end
 end
