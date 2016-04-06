@@ -5,6 +5,14 @@ get '/sources/new' do
   erb :'sources/new'
 end
 
+get '/sources/add-image' do
+  @user = current_user
+  client = DropboxClient.new(@user.dropbox_token)
+  puts "*********************************************"
+  puts "linked account:", client.account_info().inspect
+  erb :'sources/add-image'
+end
+
 #Dropbox Services
 get '/sources/dropbox' do 
   flow = dropbox_flow
