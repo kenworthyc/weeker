@@ -10,7 +10,7 @@ end
 get '/sources/add-image' do
   @user = current_user
   client = DropboxClient.new(@user.dropbox_token)
-  # puts client.metadata('/').inspect
+  puts client.metadata('/').inspect
   # path = client.metadata('/')["contents"][1]["path"]
   # @content_url = client.media(path)["url"]
   erb :'sources/add-image'
