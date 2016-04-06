@@ -8,8 +8,9 @@ end
 get '/sources/add-image' do
   @user = current_user
   client = DropboxClient.new(@user.dropbox_token)
-  puts "*********************************************"
-  puts "linked account:", client.account_info().inspect
+  # puts client.metadata('/').inspect
+  # path = client.metadata('/')["contents"][1]["path"]
+  # @content_url = client.media(path)["url"]
   erb :'sources/add-image'
 end
 
@@ -27,6 +28,11 @@ get '/sources/dropbox-complete' do
   @user = current_user 
   @user.dropbox_token = user_token[0]
   @user.save
+
+  client = DropboxClient.new(@user.dropbox_token) 
+  make_dropbox_folder("/this-week", client)
+  make_dropbox_folder("/archive", client)
+
   erb :'sources/new'
 end
 
