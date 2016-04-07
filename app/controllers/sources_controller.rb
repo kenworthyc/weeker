@@ -1,4 +1,6 @@
 require 'dropbox_sdk'
+require 'twitter'
+require 'open-uri'
 
 get '/sources/new' do 
   @user = current_user 
