@@ -10,9 +10,18 @@ end
 get '/sources/add-image' do
   @user = current_user
   client = DropboxClient.new(@user.dropbox_token)
-  puts client.metadata('/').inspect
+  puts client.metadata('/this-week').inspect
+  client.metadata('/this-week')["contents"].each do |image|
+    image_path = image["path"]
+    content_url = client.media(image_path)["url"]
+    dropbox_url = content_url + "?dl=1"
+    twitter_media_upload(dropbox_url)
+    puts "Posted #{dropbox_url}"
+    sleep 60
+  end
   # path = client.metadata('/')["contents"][1]["path"]
   # @content_url = client.media(path)["url"]
+  # twitter_media_upload(media_url)
   erb :'sources/add-image'
 end
 
@@ -51,7 +60,8 @@ get '/twitter-authentication-return' do
 end
 
 get '/test-tweet' do
-  twitter_media_upload
+  media_url ='https://dl.dropboxusercontent.com/s/ephkiagrqgfc0y4/IMG_8489.JPG?dl=1'
+  twitter_media_upload(media_url)
   # send_tweet(User.find(session[:user_id]), twitter_media_upload )
   redirect "/users/#{session[:user_id]}"
 end

@@ -44,7 +44,7 @@ helpers do
   	access_token.post(base, update, options)
   end
 
-  def twitter_media_upload
+  def twitter_media_upload(media_url)
     base = "https://api.twitter.com/1.1/statuses/update.json"
     update = {'status' => status}
     options = {'Accept' => 'application/xml'}
@@ -58,7 +58,7 @@ helpers do
       config.access_token_secret = access_token.secret
     end
     client.update_with_media("Yet More fun with weeker:", 
-      open('https://dl.dropboxusercontent.com/s/ephkiagrqgfc0y4/IMG_8489.JPG?dl=1'))
+      open(media_url))
   end
 
 end
