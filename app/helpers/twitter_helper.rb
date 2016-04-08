@@ -32,16 +32,19 @@ helpers do
   end
 
 	def twitter_media_upload
+    tokens = Destination.find_by(user_id: current_user.id)
+    access_token = OAuth::AccessToken.new(get_consumer, tokens.twitter_token, tokens.twitter_secret)
+
 		client = Twitter::REST::Client.new do |config|
-			config.consumer_key =ENV["TWITTER_KEY"]
-			config.consumer_secret=ENV["TWITTER_SECRET"]
-			config.access_token=session[:access_token].token
-			config.access_token_secret=session[:access_token].secret
+			config.consumer_key = ENV["TWITTER_KEY"]
+			config.consumer_secret= ENV["TWITTER_SECRET"]
+			config.access_token = access_token.token
+			config.access_token_secret = access_token.secret
 		end
-		client.update_with_media("Here's what I did this week:", 'https://dl.dropboxusercontent.com/s/ephkiagrqgfc0y4/IMG_8489.JPG?raw=1')
+		client.update_with_media("Here's what I did this week:", open('https://dl.dropboxusercontent.com/s/ephkiagrqgfc0y4/IMG_8489.JPG?raw=1'))
 	end
 
-# is this necessary?
+# is this necessary? //not unless we're planning to allow text tweets.
 #  def send_tweet(user, status)
     #base = "https://api.twitter.com/1.1/statuses/update.json"
     #update = {'status' => status}
