@@ -15,7 +15,7 @@ get '/sources/add-image' do
     image_path = image["path"]
     content_url = client.media(image_path)["url"]
     dropbox_url = content_url + "?dl=1"
-    twitter_media_upload(dropbox_url)
+    twitter_media_upload("This is something:", dropbox_url)
     puts "Posted #{dropbox_url}"
     sleep 60
   end
