@@ -10,15 +10,7 @@ end
 get '/sources/add-image' do
   @user = current_user
   client = DropboxClient.new(@user.dropbox_token)
-  puts client.metadata('/this-week').inspect
-  client.metadata('/this-week')["contents"].each do |image|
-    image_path = image["path"]
-    content_url = client.media(image_path)["url"]
-    dropbox_url = content_url + "?dl=1"
-    twitter_media_upload("This is something:", dropbox_url)
-    puts "Posted #{dropbox_url}"
-    sleep 60
-  end
+  tweet_all_images_in_folder(client)
   erb :'sources/add-image'
 end
 
