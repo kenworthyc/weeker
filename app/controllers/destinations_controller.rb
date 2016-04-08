@@ -13,6 +13,6 @@ get '/twitter-authentication-return' do
 end
 
 get '/test-tweet' do
-	send_tweet(User.find(session[:user_id]), twitter_media_upload )
+	twitter_media_upload
 	redirect "/users/#{session[:user_id]}"
 end
