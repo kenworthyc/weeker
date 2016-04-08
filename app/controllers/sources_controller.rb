@@ -19,9 +19,6 @@ get '/sources/add-image' do
     puts "Posted #{dropbox_url}"
     sleep 60
   end
-  # path = client.metadata('/')["contents"][1]["path"]
-  # @content_url = client.media(path)["url"]
-  # twitter_media_upload(media_url)
   erb :'sources/add-image'
 end
 
