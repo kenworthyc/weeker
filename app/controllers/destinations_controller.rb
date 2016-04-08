@@ -13,6 +13,6 @@ get '/twitter-authentication-return' do
 end
 
 get '/test-tweet' do
-	twitter_media_upload
+	twitter_media_upload("This is something, I swear:", "https://dl.dropboxusercontent.com/s/ephkiagrqgfc0y4/IMG_8489.JPG?raw=1")
 	redirect "/users/#{session[:user_id]}"
 end

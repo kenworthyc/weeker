@@ -44,14 +44,4 @@ helpers do
 		client.update_with_media(status_msg, open(media_url))
 	end
 
-# is this necessary? //not unless we're planning to allow text tweets.
-#  def send_tweet(user, status)
-    #base = "https://api.twitter.com/1.1/statuses/update.json"
-    #update = {'status' => status}
-    #options = {'Accept' => 'application/xml'}
-    #tokens = Destination.find_by(user_id: user.id)
-    #access_token = OAuth::AccessToken.new(get_consumer, tokens.twitter_token, tokens.twitter_secret)
-    #puts access_token.inspect
-    #access_token.post(base, update, options)
-  #end
 end
