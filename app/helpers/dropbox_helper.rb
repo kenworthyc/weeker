@@ -12,13 +12,7 @@ helpers do
 		 DropboxOAuth2Flow.new( ENV['DROPBOX_KEY'],	ENV['DROPBOX_SECRET'], ENV['DROPBOX_CALLBACK'], session, :dropbox_token)
 	end
 
-  def create_weekly_folder(client)
-
-  end
-
   def move_dropbox_file(client, file_url, destination_url)
-    #puts file_url
-    #puts destination_url
     client.file_move(file_url, destination_url)
   end
 
@@ -32,22 +26,20 @@ helpers do
 
   def create_archive_folder(client)
     path = "/archive/" + name_archive_folder 
-    #add test for existence
-    client.file_create_folder(path)
+    make_dropbox_folder(path, client)
+    path
   end
 
   def tweet_all_images_in_folder(client)
-    create_archive_folder(client)
+    archive_folder = create_archive_folder(client)
     client.metadata('/this-week')["contents"].each do |image|
       image_path = image["path"]
-      puts "image_path #{image_path}"
       content_url = client.media(image_path)["url"]
-      puts "content_url #{content_url}"
       dropbox_url = content_url + "?dl=1"
-      #twitter_media_upload("This is something:", dropbox_url)
+      twitter_media_upload("This is something:", dropbox_url)
       puts "Posted #{dropbox_url}"
-      destination_url = image_path.gsub(/\/this-week/,'/archive')
-      #move_dropbox_file(client, image_path, destination_url)
+      destination_url = image_path.gsub(/\/this-week/,archive_folder)
+      move_dropbox_file(client, image_path, destination_url)
       sleep 5
     end
   end
