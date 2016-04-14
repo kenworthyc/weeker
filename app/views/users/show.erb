@@ -1,5 +1,4 @@
 <h3><%= @user.first_name %>'s Account</h3>
-
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil, sed culpa animi dignissimos ab aspernatur ex quam aperiam quae ipsum impedit officiis, fugit, adipisci, delectus aliquam quod consequatur quo voluptatem.</p>
 
 <h3>Sources</h3>
@@ -7,16 +6,16 @@
 	<li>Available (click to authorize)</li>
 	<li>
 		<ul>
-            <li><a href="/sources/new">Dropbox</a></li>
+			<li><a href="/sources/new">Dropbox</a></li>
 		</ul>
 	</li>
-    <% if @user.dropbox_token %>
-	<li>Authorized</li>
-    <%end%>
+	<% if @user.dropbox_token %>
+		<li>Authorized</li>
+	<%end%>
 	<li>
 		<ul>
 		</ul>
-	</li>	
+	</li>
 </ul>
 
 <h3>Social Networks</h3>
@@ -37,5 +36,5 @@
 				<li><a href='/test-tweet'>Send a tweet</a></li>
 			<% end %>
 		</ul>
-	</li>	
+	</li>
 </ul>
