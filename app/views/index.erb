@@ -7,4 +7,6 @@
 <p>If you don't contribute anything new by the end of the week, Weeker will post a message for that too!</p>
 <p><a href="/users/new">Sign up today</a> and start making stuff.</p>
 
-<%= erb :'users/_new', locals: { errors: errors }, :layout => false %>
+<% unless current_user %>
+  <%= erb :'users/_new', locals: { errors: errors }, :layout => false %>
+<% end %>
