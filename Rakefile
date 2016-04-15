@@ -154,3 +154,17 @@ rescue LoadError
 end
 
 task :default  => :spec
+
+desc "This is the task that will handle scheduled posting of material"
+require_relative 'app/helpers/dropbox_helper'
+require_relative 'app/helpers/dropbox_module'
+include DropboxToTwitter
+task :post_work do
+  User.all.each do |user|
+    puts "this should post the work for #{user.first_name} #{user.last_name}"
+    if !!user.dropbox_token
+      client = DropboxClient.new(user.dropbox_token)
+      DropboxToTwitter.tweet_all_images_in_folder(client, user.id)
+    end
+  end
+end

@@ -1,6 +1,5 @@
-helpers do 
-
-  def get_consumer
+module TwitterModule
+	def get_consumer
   	base = 'https://twitter.com'
   	consumer = OAuth::Consumer.new(ENV['TWITTER_KEY'],
 															 ENV['TWITTER_SECRET'],
@@ -43,5 +42,4 @@ helpers do
 		end
 		client.update_with_media(status_msg, open(media_url))
 	end
-
 end
