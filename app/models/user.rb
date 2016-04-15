@@ -1,5 +1,4 @@
 require 'bcrypt'
-require 'faker'
 
 class User < ActiveRecord::Base
   include BCrypt
