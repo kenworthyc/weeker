@@ -28,7 +28,7 @@ helpers do
     "/archive/" + name_archive_folder
   end
 
-  def tweet_all_images_in_folder(client)
+  def tweet_all_images_in_folder(client, user_id = current_user.id)
     archive_folder = create_archive_folder(client)
     if client.metadata('/this-week')["contents"].empty?
       #puts "I am empty"
@@ -38,7 +38,7 @@ helpers do
         image_path = image["path"]
         content_url = client.media(image_path)["url"]
         dropbox_url = content_url + "?dl=1"
-        twitter_media_upload("This is something:", dropbox_url)
+        twitter_media_upload("This is something:", dropbox_url, user_id)
         destination_url = image_path.gsub(/\/this-week/,archive_folder)
         move_dropbox_file(client, image_path, destination_url)
         sleep 5

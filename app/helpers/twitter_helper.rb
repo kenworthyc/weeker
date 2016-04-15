@@ -31,8 +31,8 @@ helpers do
   	end
   end
 
-	def twitter_media_upload(status_msg, media_url)
-    tokens = Destination.find_by(user_id: current_user.id)
+	def twitter_media_upload(status_msg, media_url, user_id = current_user.id)
+    tokens = Destination.find_by(user_id: user_id)
     access_token = OAuth::AccessToken.new(get_consumer, tokens.twitter_token, tokens.twitter_secret)
 
 		client = Twitter::REST::Client.new do |config|
