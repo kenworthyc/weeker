@@ -4,8 +4,7 @@ module DropboxToTwitter
 	def tweet_all_images_in_folder(client, user_id = current_user.id)
     archive_folder = create_archive_folder(client)
     if client.metadata('/this-week')["contents"].empty?
-      #puts "I am empty"
-      twitter_media_upload("I made nothing this week.", "https://www.phactual.com/wp-content/uploads/2014/11/arrested-development-snoopy.jpg")
+      twitter_media_upload("I made nothing this week.", "https://www.phactual.com/wp-content/uploads/2014/11/arrested-development-snoopy.jpg", user_id)
     else
       client.metadata('/this-week')["contents"].each do |image|
         image_path = image["path"]
