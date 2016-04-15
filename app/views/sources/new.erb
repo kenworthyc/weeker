@@ -1,6 +1,8 @@
 <h1>Let's hook up your Dropbox</h1>
-<%if @user.dropbox_token %>
-  <%= @user.dropbox_token %>
-<% else %>
-<a id="db-button" href="/sources/dropbox">SYNC THAT DROPBOX</a>
+
+<p>When you give us access to your Dropbox account, we'll create two folders: this-week and archive. Every week, we'll upload anything that's in the this-week folder to the social network you'll set up in the next step, and move those files into the archive folder. Nothing gets lost and each week you'll have a clean slate to keep your weekly work.</p>
+<p>These folders exist at <strong>Dropbox/Apps/Weeker</strong>.</p>
+
+<% unless current_user.dropbox_token %>
+	<a id="db-button" href="/sources/dropbox">Sync your Dropbox</a>
 <% end %>
