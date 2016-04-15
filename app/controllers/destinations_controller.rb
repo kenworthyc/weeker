@@ -1,5 +1,9 @@
 require 'twitter'
 
+get '/destinations/new' do
+  erb :'destinations/new'
+end
+
 #Twitter Services
 
 get '/twitter-authenticate' do

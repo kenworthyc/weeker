@@ -33,6 +33,10 @@ get '/sources/dropbox-complete' do
   make_dropbox_folder("/this-week", client)
   make_dropbox_folder("/archive", client)
 
-  erb :'sources/new'
+  if @user.destinations.empty?
+    redirect "/destinations/new"
+  else
+    redirect "/users/#{@user.id}"
+  end
 end
 
