@@ -1,40 +1,27 @@
 <h3><%= @user.first_name %>'s Account</h3>
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil, sed culpa animi dignissimos ab aspernatur ex quam aperiam quae ipsum impedit officiis, fugit, adipisci, delectus aliquam quod consequatur quo voluptatem.</p>
 
-<h3>Sources</h3>
-<ul>
-	<li>Available (click to authorize)</li>
-	<li>
-		<ul>
-			<li><a href="/sources/new">Dropbox</a></li>
-		</ul>
-	</li>
-	<% if @user.dropbox_token %>
-		<li>Authorized</li>
-	<%end%>
-	<li>
-		<ul>
-		</ul>
-	</li>
-</ul>
+<h3>Your sources with Weeker</h3>
+  <ul>
+    <% if @user.dropbox_token %>
+    <li>Dropbox</li>
+    <% else %>	
+    <li><a href="/sources/new">Dropbox</a></li>
+    <% end %>
+  </ul>
 
-<h3>Social Networks</h3>
-<ul>
-	<li>Available (click to authorize)</li>
-	<li>
-		<ul>
-			<% if !destination || !destination.twitter_token %>
-				<li><a href="/twitter-authenticate">Twitter</a></li>
-			<% end %>
-		</ul>
-	</li>
-	<li>Authorized</li>
-	<li>
-		<ul>
-			<% if !!destination && destination.twitter_token %>
-				<li><a href="/twitter-disable">Twitter</a></li>
-				<li><a href='/test-tweet'>Send a tweet</a></li>
-			<% end %>
-		</ul>
-	</li>
-</ul>
+<h3>Your social networks with Weeker</h3>
+  <ul>
+    <% if @user.destinations.first.twitter_token %>
+    <li>Twitter</li>
+    <% else %>
+    <li><a href="/twitter-authenticate">Twitter</a></li>
+    <% end %>
+  </ul>
+
+<h4>Disconnect your social networks</h4>
+  <ul>
+    <% if !!@user.destinations && @user.destinations.first.twitter_token %>
+    <li><a href="/twitter-disable">Disconnect your Twitter account</a></li>
+    <% end %>
+  </ul>
