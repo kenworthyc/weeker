@@ -154,3 +154,14 @@ rescue LoadError
 end
 
 task :default  => :spec
+
+desc "This is the task that will handle scheduled posting of material"
+require_relative 'app/helpers/dropbox_helper'
+require_relative 'app/helpers/sessions_helper'
+require_relative 'app/helpers/twitter_helper'
+task :post_work do
+  User.all.each do |user|
+    puts "this should post the work for #{user.first_name} #{user.last_name}"
+    p SessionsHelper.current_user
+  end
+end
