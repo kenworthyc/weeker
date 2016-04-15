@@ -1,16 +1,15 @@
 get '/' do
+  @user = User.new
   if session[:user_id]
     @user = User.find(session[:user_id])
   end
   puts session[:user_id]
-  erb :'index'
+  errors = @user.errors.full_messages
+  erb :'index', locals: { errors: errors}
 end
 
 get '/users/new/?' do
   @user = User.new
-
-  errors = @user.errors.full_messages
-  erb :'users/new', locals: { errors: errors }
 end
 
 post '/users/?' do
@@ -18,9 +17,8 @@ post '/users/?' do
 
   if @user.save
     session[:user_id] = @user.id
-    redirect "/users/#{@user.id}"
+    redirect "/sources/new"
   else
-    #@user
     errors = @user.errors.full_messages
 
     erb :'users/new', locals: { errors: errors }
