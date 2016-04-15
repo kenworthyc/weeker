@@ -8,9 +8,9 @@ helpers do
     end
   end
 
-	def dropbox_flow
-		 DropboxOAuth2Flow.new( ENV['DROPBOX_KEY'],	ENV['DROPBOX_SECRET'], ENV['DROPBOX_CALLBACK'], session, :dropbox_token)
-	end
+  def dropbox_flow
+    DropboxOAuth2Flow.new( ENV['DROPBOX_KEY'],	ENV['DROPBOX_SECRET'], ENV['DROPBOX_CALLBACK'], session, :dropbox_token)
+  end
 
   def move_dropbox_file(client, file_url, destination_url)
     client.file_move(file_url, destination_url)
@@ -25,9 +25,7 @@ helpers do
   end
 
   def create_archive_folder(client)
-    path = "/archive/" + name_archive_folder 
-    make_dropbox_folder(path, client)
-    path
+    "/archive/" + name_archive_folder
   end
 
   def tweet_all_images_in_folder(client)
@@ -37,7 +35,6 @@ helpers do
       content_url = client.media(image_path)["url"]
       dropbox_url = content_url + "?dl=1"
       twitter_media_upload("This is something:", dropbox_url)
-      puts "Posted #{dropbox_url}"
       destination_url = image_path.gsub(/\/this-week/,archive_folder)
       move_dropbox_file(client, image_path, destination_url)
       sleep 5
