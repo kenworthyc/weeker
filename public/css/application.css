@@ -29,6 +29,7 @@
 
 .navbar__item--session {
 	float: right;
+	margin-top: -.3rem;
 }
 
 .navbar__link {
@@ -43,5 +44,5 @@
 .logo {
 	z-index: 10;
 	margin-top: -3rem;
-	height: 15rem;
+	width: 100%;
 }
