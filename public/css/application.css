@@ -1,6 +1,41 @@
-.container {
-  width: 80%;
-  height: 90%;
-  margin: 0 auto;
+/* navbar link color: #59445C */
+/* navbar bg color: #F6F1FF */
+
+.html {
+	font-size: 14px;
 }
 
+.main {
+  width: 80%;
+  height: 90%;
+  margin: .5rem auto;
+}
+
+.navbar {
+	width: 100%;
+	height: 3rem;
+	padding: 1.75rem;
+	background-color: #eee;
+}
+
+.navbar__list {
+	list-style: none;
+}
+
+.navbar__item {
+	padding-right: 3rem;
+	float: left;
+}
+
+.navbar__item--session {
+	float: right;
+}
+
+.navbar__link {
+	color: #59445C;
+	font-size: 1.2rem;
+	letter-spacing: .1rem;
+	text-transform: uppercase;
+	text-decoration: none;
+	font-weight: 600;
+}
