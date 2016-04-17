@@ -21,7 +21,7 @@
 <div class="container">
 <% if session[:user_id] %>
   <ul id="main-nav">
-  <li>Welcome: <%= current_user.email %> |</li><li><form method="post" action="/sessions/<%= current_user.id %>" class="logout">
+  <li>Welcome, <%= current_user.first_name %> |</li><li><form method="post" action="/sessions/<%= current_user.id %>" class="logout">
   <input type="hidden" name="_method" value="DELETE">
   <input type="submit" value="logout" class="delete_button"></form></li>
   <% else %>
