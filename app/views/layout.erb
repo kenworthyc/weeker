@@ -1,35 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <!--
-    normalize.css removes cross-browser differences in defaults, e.g.,
-    differences in how form elements appear between Firefox and IE
-    See: http://necolas.github.com/normalize.css/
-  -->
-  <link rel="stylesheet" href="/css/normalize.css">
-  <!--
-    application.css is where you put your styles
-  -->
-  <link rel="stylesheet" href="/css/application.css">
+	<head>
+		<link rel="stylesheet" href="/css/normalize.css">
+		<link rel="stylesheet" href="/css/skeleton.css">
+		<link rel="stylesheet" href="/css/application.css">
 
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script src="/js/application.js"></script>
-  <title>Weeker</title>
-</head>
-<body>
-<div class="container">
-<% if session[:user_id] %>
-  <ul id="main-nav">
-  <li>Welcome: <%= current_user.email %> |</li><li><form method="post" action="/sessions/<%= current_user.id %>" class="logout">
-  <input type="hidden" name="_method" value="DELETE">
-  <input type="submit" value="logout" class="delete_button"></form></li>
-  <% else %>
-  <ul id="main-nav">
-	  <li><a href="/sessions/new">Login</a></li>
-  </ul>
-  <% end %>
-  <h2>Weeker</h2>
-    <%= yield %>
-</div>
-</body>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script src="/js/application.js"></script>
+		<title>Weeker</title>
+	</head>
+	<body>
+		<div class="navbar">
+			<ul class="navbar__list">
+				<li class="navbar__item">
+					<a class="navbar__link" href="/about">What is Weeker?</a>
+				</li>
+				<li class="navbar__item">
+					<a class="navbar__link" href="/developers">Developers</a>
+				</li>
+				<% if session[:user_id] %>
+					<li class="navbar__item">
+						Hey, <%= current_user.first_name %>!
+					</li>
+					<li class="navbar__item navbar__item--session">
+						<form method="post" action="/sessions/<%= current_user.id %>" class="logout">
+							<input type="hidden" name="_method" value="DELETE">
+							<input type="submit" value="logout" class="delete_button">
+						</form>
+					</li>
+				<% else %>
+					<li class="navbar__item navbar__item--session">
+						<a class="navbar__link" href="/sessions/new">Login</a>
+					</li>
+				<% end %>
+			</ul>
+		</div>
+		<div class="main">
+			<img class="logo" src="/images/weeker-logo.png" alt="Weeker logo">
+			<%= yield %>
+		</div>
+	</body>
 </html>
