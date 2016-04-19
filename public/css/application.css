@@ -46,3 +46,13 @@
 	margin-top: -3rem;
 	width: 100%;
 }
+
+.button--red{
+	color: white;
+	background-color:red;
+}
+
+.button--red-hover:hover{
+	color: red;
+	background-color:white;
+}

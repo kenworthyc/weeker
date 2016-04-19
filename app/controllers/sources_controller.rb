@@ -11,7 +11,7 @@ get '/sources/add-image' do
   @user = current_user
   client = DropboxClient.new(@user.dropbox_token)
   tweet_all_images_in_folder(client)
-  erb :'sources/add-image'
+  redirect "/users/#{@user.id}"
 end
 
 #Dropbox Services
