@@ -52,7 +52,7 @@
 	background-color:red;
 }
 
-.button--red-hover:hover{
+.button--red:hover{
 	color: red;
 	background-color:white;
 }
