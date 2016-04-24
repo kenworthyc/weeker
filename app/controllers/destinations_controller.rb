@@ -28,9 +28,10 @@ end
 get '/tumblr-callback' do
 	get_tumblr_access_token
 	store_tumblr_access_token
-	redirect "/users/#{session[:user_id]}"
+	get_and_store_tumblr_blog_title
+	# redirect "/users/#{session[:user_id]}"
 end
 
 get '/tumblr-testing' do
-	tumblr_media_upload()
+	get_and_store_tumblr_blog_title
 end

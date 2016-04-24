@@ -25,7 +25,6 @@ module TumblrModule
  
   def store_tumblr_access_token
   	id = session[:user_id]
-  	puts session[:tumblr_access_token].inspect
   	token = session[:tumblr_access_token].token
   	secret = session[:tumblr_access_token].secret
   	destination = Destination.find_by(user_id: id)
@@ -40,10 +39,15 @@ module TumblrModule
 
   def get_and_store_tumblr_blog_title
   	client = get_tumblr_client
+  	blogs = []
   	client.info["user"]["blogs"].each do |blog|
-  		puts blog["url"]
+  		blogs << blog["url"].split('/')[2]
   	end
-  	gets.chomp
+  	erb :blog_selection, layout: false, locals: {blogs: blogs}
+  end
+
+  def store_tumblr_blog_title
+  	
   end
 
   def get_tumblr_client

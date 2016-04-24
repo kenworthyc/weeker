@@ -1,0 +1,9 @@
+<h2>Please select the blog you want Weeker to post to</h2>
+<form method="/post" action="/tumblr-blog-select">
+	<select>
+		<% blogs.each do |blog| %>
+			<option value=<%blog%>><%= blog %></option>
+		<% end %>
+	</select>
+	<input type="submit" name="Select blog">
+</form>
