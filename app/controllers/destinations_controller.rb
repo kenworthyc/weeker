@@ -32,8 +32,17 @@ get '/soundcloud-complete' do
   code = params[:code]
   client = get_user
   access_token = client.exchange_token(:code => code)
-  client = Soundcloud.new(:access_token => access_token[:access_token])
-  soundcloud_user = client.get('/me')
-  puts soundcloud_user.username
+  id = session[:user_id] 
+  destination = Destination.find_by(user_id: id)
+  if destination
+    destination.soundcloud_token = access_token[:access_token]
+    destination.save
+  else
+    Destination.create(user_id: id, soundcloud_token: access_token[:access_token])
+  end
+  #client = Soundcloud.new(:access_token => access_token[:access_token])
+  #soundcloud_user = client.get('/me')
+  #puts soundcloud_user.username
   redirect "/users/#{session[:user_id]}"
 end
+

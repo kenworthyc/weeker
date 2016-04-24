@@ -1,3 +1,4 @@
+require 'Faker'
 User.create!(first_name: "Week", last_name: "Weeker", email:"weekerapp@gmail.com", password: "password")
 
 20.times do
