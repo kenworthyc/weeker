@@ -30,3 +30,7 @@ get '/tumblr-callback' do
 	store_tumblr_access_token
 	redirect "/users/#{session[:user_id]}"
 end
+
+get '/tumblr-testing' do
+	tumblr_media_upload()
+end
