@@ -20,6 +20,7 @@ gem 'dotenv'
 gem 'oauth'
 
 gem 'twitter'
+gem 'tumblr_client'
 
 # Clockwork
 gem 'clockwork'
