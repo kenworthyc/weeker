@@ -22,10 +22,18 @@ get '/test-tweet' do
 	redirect "/users/#{session[:user_id]}"
 end
 
-get '/test-soundcloud' do
+get '/soundcloud-authenticate' do
   client = get_user
   p client
   redirect client.authorize_url()
+end
+
+get '/soundcloud-disable' do
+  id = session[:user_id]
+  destination = Destination.find_by(user_id: id)
+  destination.soundcloud_token = nil
+  destination.save
+  redirect "/users/#{session[:user_id]}"
 end
 
 get '/soundcloud-complete' do

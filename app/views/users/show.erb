@@ -17,6 +17,11 @@
     <% else %>
     <li><a href="/twitter-authenticate">Twitter</a></li>
     <% end %>
+    <% if @user.destinations.first.soundcloud_token %>
+	<li>Soundcloud</li>
+    <% else %> 
+    	<li><a href="/soundcloud-authenticate">Soundcloud</a></li>
+    <% end %>
   </ul>
 
 <h4>Disconnect your social networks</h4>
@@ -24,6 +29,9 @@
     <% if !!@user.destinations && @user.destinations.first.twitter_token %>
     <li><a href="/twitter-disable">Disconnect your Twitter account</a></li>
     <% end %>
+    <% if !!@user.destinations && @user.destinations.first.soundcloud_token %>
+    <li><a href="/soundcloud-disable">Disconnect your Soundcloud account</a></li>
+<% end %>
   </ul>
 
 <h4>Push your work up early</h4>
