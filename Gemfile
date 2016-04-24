@@ -25,6 +25,7 @@ gem 'twitter'
 gem 'clockwork'
 gem 'daemons'
 
+gem 'soundcloud'
 gem 'dropbox-sdk'
 group :test do
   gem 'shoulda-matchers'
