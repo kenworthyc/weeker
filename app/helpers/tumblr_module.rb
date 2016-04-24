@@ -1,3 +1,4 @@
+require 'tumblr_client'
 module TumblrModule
 	def get_tumblr_consumer
   	base = 'https://www.tumblr.com'
@@ -37,6 +38,28 @@ module TumblrModule
   	end
   end
 
+  def get_and_store_tumblr_blog_title
+  	client = get_tumblr_client
+  	client.info["user"]["blogs"].each do |blog|
+  		puts blog["url"]
+  	end
+  	gets.chomp
+  end
+
+  def get_tumblr_client
+  	tokens = Destination.find_by(user_id: current_user.id)
+    access_token = OAuth::AccessToken.new(get_consumer, tokens.tumblr_token, tokens.tumblr_secret)
+
+  	Tumblr.configure do |config|
+    	config.consumer_key = ENV["TUMBLR_KEY"]
+			config.consumer_secret= ENV["TUMBLR_SECRET"]
+			config.oauth_token = access_token.token
+			config.oauth_token_secret = access_token.secret
+    end
+
+    client = Tumblr::Client.new
+  end
+
 	def tumblr_media_upload(status_msg, media_url, user_id = current_user.id)
     tokens = Destination.find_by(user_id: user_id)
     access_token = OAuth::AccessToken.new(get_consumer, tokens.tumblr_token, tokens.tumblr_secret)
@@ -48,7 +71,7 @@ module TumblrModule
 			config.oauth_token_secret = access_token.secret
     end
 
-    client = Tumblr::Client.new(client: :httpclient)
+    client = Tumblr::Client.new
 
 	end
 end
