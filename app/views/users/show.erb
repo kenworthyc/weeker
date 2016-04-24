@@ -29,6 +29,9 @@
     <% if !!@user.destinations && @user.destinations.first.twitter_token %>
     <li><a href="/twitter-disable">Disconnect your Twitter account</a></li>
     <% end %>
+    <% if !!@user.destinations && @user.destinations.first.tumblr_token %>
+    <li><a href="/tumblr-disable">Disconnect your Tumblr account</a></li>
+    <% end %>
   </ul>
 
 <h4>Push your work up early</h4>
