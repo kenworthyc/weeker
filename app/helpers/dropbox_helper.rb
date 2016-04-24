@@ -33,6 +33,7 @@ helpers do
     if client.metadata('/this-week')["contents"].empty?
       #puts "I am empty"
       twitter_media_upload("I made nothing this week.", "https://www.phactual.com/wp-content/uploads/2014/11/arrested-development-snoopy.jpg")
+      reset_streak_count
     else
       client.metadata('/this-week')["contents"].each do |image|
         image_path = image["path"]
@@ -42,6 +43,10 @@ helpers do
         destination_url = image_path.gsub(/\/this-week/,archive_folder)
         move_dropbox_file(client, image_path, destination_url)
         sleep 5
+      end
+      increment_streak_count
+      if new_longest_streak?
+        update_longest_streak
       end
     end
   end
