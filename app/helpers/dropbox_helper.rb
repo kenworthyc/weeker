@@ -46,4 +46,19 @@ helpers do
     end
   end
 
+  def increment_streak_count
+    current_user.increment(streak_count)  
+  end
+
+  def reset_streak_count
+    current_user.streak_count = 0 
+  end
+
+  def new_longest_streak?
+    current_user.streak_count > current_user.longest_streak 
+  end
+
+  def update_longest_streak
+    current_user.longest_streak = current_user.streak_count
+  end
 end 
