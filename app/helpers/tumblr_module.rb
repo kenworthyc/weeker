@@ -24,6 +24,7 @@ module TumblrModule
  
   def store_tumblr_access_token
   	id = session[:user_id]
+  	puts session[:tumblr_access_token].inspect
   	token = session[:tumblr_access_token].token
   	secret = session[:tumblr_access_token].secret
   	destination = Destination.find_by(user_id: id)
@@ -40,12 +41,14 @@ module TumblrModule
     tokens = Destination.find_by(user_id: user_id)
     access_token = OAuth::AccessToken.new(get_consumer, tokens.tumblr_token, tokens.tumblr_secret)
 
-		client = tumblr::REST::Client.new do |config|
-			config.consumer_key = ENV["TUMBLR_KEY"]
+    Tumblr.configure do |config|
+    	config.consumer_key = ENV["TUMBLR_KEY"]
 			config.consumer_secret= ENV["TUMBLR_SECRET"]
-			config.access_token = access_token.token
-			config.access_token_secret = access_token.secret
-		end
-		client.update_with_media(status_msg, open(media_url))
+			config.oauth_token = access_token.token
+			config.oauth_token_secret = access_token.secret
+    end
+
+    client = Tumblr::Client.new(client: :httpclient)
+
 	end
 end
