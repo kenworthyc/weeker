@@ -32,13 +32,13 @@ helpers do
     archive_folder = create_archive_folder(client)
     if client.metadata('/this-week')["contents"].empty?
       #puts "I am empty"
-      twitter_media_upload("I made nothing this week.", "https://www.phactual.com/wp-content/uploads/2014/11/arrested-development-snoopy.jpg")
+      twitter_media_upload("I made nothing this week. Posted via @weekerapp #weekerapp", "https://www.phactual.com/wp-content/uploads/2014/11/arrested-development-snoopy.jpg")
     else
       client.metadata('/this-week')["contents"].each do |image|
         image_path = image["path"]
         content_url = client.media(image_path)["url"]
         dropbox_url = content_url + "?dl=1"
-        twitter_media_upload("This is something:", dropbox_url, user_id)
+        twitter_media_upload("This is something: Posted via @weekerapp #weekerapp", dropbox_url, user_id)
         destination_url = image_path.gsub(/\/this-week/,archive_folder)
         move_dropbox_file(client, image_path, destination_url)
         sleep 5
