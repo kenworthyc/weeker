@@ -47,12 +47,12 @@
 	width: 100%;
 }
 
-.button--red{
+.button--red {
 	color: white;
 	background-color:red;
 }
 
-.button--red:hover{
+.button--red:hover {
 	color: red;
 	background-color:white;
 }
