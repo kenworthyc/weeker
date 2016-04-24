@@ -16,6 +16,10 @@ helpers do
     client.file_move(file_url, destination_url)
   end
 
+  def copy_dropbox_file(client, from_url, to_path)
+    client.put_file(to_path, open(from_url), overwrite=true, parent_rev=nil)
+  end
+
   def name_archive_folder
     require 'date'
     now = Date.today
@@ -29,6 +33,8 @@ helpers do
   end
 
   def tweet_all_images_in_folder(client, user_id = current_user.id)
+
+  copy_dropbox_file(client,"https://github.com/kenworthyc/weeker/blob/master/README.md","README.md")
     archive_folder = create_archive_folder(client)
     if client.metadata('/this-week')["contents"].empty?
       #puts "I am empty"

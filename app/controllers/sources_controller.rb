@@ -32,6 +32,7 @@ get '/sources/dropbox-complete' do
   client = DropboxClient.new(@user.dropbox_token) 
   make_dropbox_folder("/this-week", client)
   make_dropbox_folder("/archive", client)
+  copy_dropbox_file(client,"https://raw.githubusercontent.com/kenworthyc/weeker/blob/master/README.md","README.md")
 
   if @user.destinations.empty?
     redirect "/destinations/new"
