@@ -35,16 +35,16 @@ helpers do
       twitter_media_upload("I made nothing this week.", "https://www.phactual.com/wp-content/uploads/2014/11/arrested-development-snoopy.jpg")
       reset_streak_count
     else
+      increment_streak_count
       client.metadata('/this-week')["contents"].each do |image|
         image_path = image["path"]
         content_url = client.media(image_path)["url"]
         dropbox_url = content_url + "?dl=1"
-        twitter_media_upload("This is something:", dropbox_url, user_id)
+        twitter_media_upload("My current streak is #{current_user.streak_count}", dropbox_url, user_id)
         destination_url = image_path.gsub(/\/this-week/,archive_folder)
         move_dropbox_file(client, image_path, destination_url)
         sleep 5
       end
-      increment_streak_count
       if new_longest_streak?
         update_longest_streak
       end
@@ -52,11 +52,11 @@ helpers do
   end
 
   def increment_streak_count
-    current_user.increment(streak_count)  
+    current_user.increment!(:streak_count) 
   end
 
   def reset_streak_count
-    current_user.streak_count = 0 
+    current_user.update_attribute!(:streak_count, 0)    
   end
 
   def new_longest_streak?
@@ -64,6 +64,6 @@ helpers do
   end
 
   def update_longest_streak
-    current_user.longest_streak = current_user.streak_count
+    current_user.update_attribute!(:longest_streak, current_user.streak_count)
   end
 end 
