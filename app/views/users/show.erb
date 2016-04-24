@@ -17,6 +17,11 @@
     <% else %>
     <li><a href="/twitter-authenticate">Twitter</a></li>
     <% end %>
+    <% if @user.destinations.first.tumblr_token %>
+    <li>Tumblr</li>
+    <% else %>
+    <li><a href="/tumblr-authenticate">Tumblr</a></li>
+    <% end %>
   </ul>
 
 <h4>Disconnect your social networks</h4>
