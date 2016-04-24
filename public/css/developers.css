@@ -1,0 +1,16 @@
+/* DEVELOPERS PAGE */
+
+.developer__list {
+	list-style: none;
+}
+
+.dev__item {
+	display: inline-block;
+	text-align: center;
+
+}
+
+.dev__image {
+		width: 75%;
+		border-radius: 100px;
+	}
