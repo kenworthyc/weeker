@@ -1,19 +1,25 @@
 require_relative 'twitter_module'
 include TwitterModule
 module DropboxToTwitter
-	def tweet_all_images_in_folder(client, user_id = current_user.id)
+  def tweet_all_images_in_folder(client, user_id = current_user.id)
     archive_folder = create_archive_folder(client)
     if client.metadata('/this-week')["contents"].empty?
-      twitter_media_upload("I made nothing this week.", "https://www.phactual.com/wp-content/uploads/2014/11/arrested-development-snoopy.jpg", user_id)
+      #puts "I am empty"
+      twitter_media_upload("I made nothing this week.", "https://www.phactual.com/wp-content/uploads/2014/11/arrested-development-snoopy.jpg")
+      reset_streak_count
     else
+      increment_streak_count
       client.metadata('/this-week')["contents"].each do |image|
         image_path = image["path"]
         content_url = client.media(image_path)["url"]
         dropbox_url = content_url + "?dl=1"
-        twitter_media_upload("This is something:", dropbox_url, user_id)
+        twitter_media_upload("This is something: Posted via @weekerapp #weekerapp. My current streak is #{current_user.streak_count}", dropbox_url, user_id)
         destination_url = image_path.gsub(/\/this-week/,archive_folder)
         move_dropbox_file(client, image_path, destination_url)
         sleep 5
+      end
+      if new_longest_streak?
+        update_longest_streak
       end
     end
   end
@@ -44,5 +50,21 @@ module DropboxToTwitter
 
   def create_archive_folder(client)
     "/archive/" + name_archive_folder
+  end
+   
+  def increment_streak_count
+    current_user.increment!(:streak_count) 
+  end
+
+  def reset_streak_count
+    current_user.update_attribute!(:streak_count, 0)    
+  end
+
+  def new_longest_streak?
+    current_user.streak_count > current_user.longest_streak 
+  end
+
+  def update_longest_streak
+    current_user.update_attribute!(:longest_streak, current_user.streak_count)
   end
 end
