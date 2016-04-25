@@ -48,9 +48,14 @@ get '/soundcloud-complete' do
   else
     Destination.create(user_id: id, soundcloud_token: access_token[:access_token])
   end
-  #client = Soundcloud.new(:access_token => access_token[:access_token])
-  #soundcloud_user = client.get('/me')
-  #puts soundcloud_user.username
   redirect "/users/#{session[:user_id]}"
 end
 
+get '/soundcloud-upload' do
+  id = session[:user_id]
+  destination = Destination.find_by(user_id: id)
+  access_token = destination.soundcloud_token
+  client = Soundcloud.new(:access_token => access_token)  
+  file = 'mpthreetest.mp3'
+  sound_url = upload_file(client, file)
+end
