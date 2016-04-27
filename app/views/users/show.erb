@@ -12,7 +12,7 @@
 
 <h3>Your social networks with Weeker</h3>
   <ul>
-    <% if @user.destinations.first.twitter_token %>
+	  <% if @user.destinations.exists? && @user.destinations.first.twitter_token  %>
     <li>Twitter</li>
     <% else %>
     <li><a href="/twitter-authenticate">Twitter</a></li>
@@ -21,7 +21,7 @@
 
 <h4>Disconnect your social networks</h4>
   <ul>
-    <% if !!@user.destinations && @user.destinations.first.twitter_token %>
+	  <% if @user.destinations.exists? && @user.destinations.first.twitter_token %>
     <li><a href="/twitter-disable">Disconnect your Twitter account</a></li>
     <% end %>
   </ul>
