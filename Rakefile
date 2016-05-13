@@ -155,19 +155,26 @@ end
 
 task :default  => :spec
 
-desc "This is the task that will handle scheduled posting of material"
+desc "This is the task that handles scheduled posting of material"
 require_relative 'app/helpers/dropbox_helper'
 require_relative 'app/helpers/dropbox_module'
 include DropboxToTwitter
 task :post_work do
   time = Time.now
   if time.wday == 1
+    print "Happy Monday! Posting user materials ... "
     User.all.each do |user|
-      #puts "this should post the work for #{user.first_name} #{user.last_name}"
+      print "Posting work for #{user.first_name} #{user.last_name} ... "
       if !!user.dropbox_token
         client = DropboxClient.new(user.dropbox_token)
         DropboxToTwitter.tweet_all_images_in_folder(client, user.id)
+        puts "posted."
+      else
+        puts "no Dropbox token!"
       end
     end
+    puts "... posting user materials complete."
+  else
+    puts "Happy non-Monday! Nothing to do today!"
   end
 end
