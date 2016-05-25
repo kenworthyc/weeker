@@ -1,11 +1,10 @@
 require_relative 'twitter_module'
 include TwitterModule
 module DropboxToTwitter
-  def tweet_all_images_in_folder(client, user_id = current_user.id)
+  def tweet_all_images_in_folder(client, user_id)
     copy_file_to_user_folder(client, 'README.txt', "https://raw.githubusercontent.com/kenworthyc/weeker/master/public/docs/readme.txt")
     archive_folder = create_archive_folder(client)
     if client.metadata('/this-week')["contents"].empty?
-      #puts "I am empty"
       twitter_media_upload("I made nothing this week.", "https://www.phactual.com/wp-content/uploads/2014/11/arrested-development-snoopy.jpg")
       reset_streak_count
     else
