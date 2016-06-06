@@ -55,20 +55,21 @@ module DropboxToTwitter
   def create_archive_folder(client)
     "/archive/" + name_archive_folder
   end
-   
+
   def increment_streak_count
-    current_user.increment!(:streak_count) 
+    current_user.increment!(:streak_count)
   end
 
   def reset_streak_count
-    current_user.update_attribute!(:streak_count, 0)    
+    current_user.update_attribute!(:streak_count, 0)
   end
 
   def new_longest_streak?
-    current_user.streak_count > current_user.longest_streak 
+    current_user.streak_count > current_user.longest_streak
   end
 
   def update_longest_streak
     current_user.update_attribute!(:longest_streak, current_user.streak_count)
   end
 end
+
