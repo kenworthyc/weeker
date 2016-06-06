@@ -10,7 +10,7 @@ end
 get '/sources/add-image' do
   @user = current_user
   client = DropboxClient.new(@user.dropbox_token)
-  tweet_all_images_in_folder(client)
+  tweet_all_images_in_folder(client, current_user.id)
   redirect "/users/#{@user.id}"
 end
 
