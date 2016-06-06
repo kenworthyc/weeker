@@ -5,7 +5,7 @@ module DropboxToTwitter
     copy_file_to_user_folder(client, 'README.txt', "https://raw.githubusercontent.com/kenworthyc/weeker/master/public/docs/readme.txt")
     archive_folder = create_archive_folder(client)
     if client.metadata('/this-week')["contents"].empty?
-      twitter_media_upload("I made nothing this week.", "https://www.phactual.com/wp-content/uploads/2014/11/arrested-development-snoopy.jpg")
+      twitter_media_upload("I made nothing this week.", "https://www.phactual.com/wp-content/uploads/2014/11/arrested-development-snoopy.jpg", user_id)
       reset_streak_count
     else
       increment_streak_count
@@ -55,20 +55,21 @@ module DropboxToTwitter
   def create_archive_folder(client)
     "/archive/" + name_archive_folder
   end
-   
+
   def increment_streak_count
-    current_user.increment!(:streak_count) 
+    current_user.increment!(:streak_count)
   end
 
   def reset_streak_count
-    current_user.update_attribute!(:streak_count, 0)    
+    current_user.update_attribute!(:streak_count, 0)
   end
 
   def new_longest_streak?
-    current_user.streak_count > current_user.longest_streak 
+    current_user.streak_count > current_user.longest_streak
   end
 
   def update_longest_streak
     current_user.update_attribute!(:longest_streak, current_user.streak_count)
   end
 end
+

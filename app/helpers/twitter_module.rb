@@ -1,12 +1,12 @@
 module TwitterModule
-	def get_consumer
-  	base = 'https://twitter.com'
-  	consumer = OAuth::Consumer.new(ENV['TWITTER_KEY'],
-															 ENV['TWITTER_SECRET'],
-															 { site: base } )
+  def get_consumer
+    base = 'https://twitter.com'
+    return OAuth::Consumer.new(ENV['TWITTER_KEY'], 
+                               ENV['TWITTER_SECRET'], 
+                               { site: base } )
   end
 
-	def get_twitter_info
+  def get_twitter_info
 		request_token = get_consumer.get_request_token(oauth_callback: ENV['TWITTER_CALLBACK'])
 		session[:request_token] = request_token
 		redirect request_token.authorize_url
@@ -30,7 +30,7 @@ module TwitterModule
   	end
   end
 
-	def twitter_media_upload(status_msg, media_url, user_id = current_user.id)
+	def twitter_media_upload(status_msg, media_url, user_id)
     tokens = Destination.find_by(user_id: user_id)
     access_token = OAuth::AccessToken.new(get_consumer, tokens.twitter_token, tokens.twitter_secret)
 
@@ -43,3 +43,4 @@ module TwitterModule
 		client.update_with_media(status_msg, open(media_url))
 	end
 end
+
