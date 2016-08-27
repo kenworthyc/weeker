@@ -17,12 +17,20 @@
     <% else %>
     <li><a href="/twitter-authenticate">Twitter</a></li>
     <% end %>
+    <% if @user.destinations.first.tumblr_token %>
+    <li>Tumblr</li>
+    <% else %>
+    <li><a href="/tumblr-authenticate">Tumblr</a></li>
+    <% end %>
   </ul>
 
 <h4>Disconnect your social networks</h4>
   <ul>
 	  <% if @user.destinations.exists? && @user.destinations.first.twitter_token %>
     <li><a href="/twitter-disable">Disconnect your Twitter account</a></li>
+    <% end %>
+    <% if !!@user.destinations && @user.destinations.first.tumblr_token %>
+    <li><a href="/tumblr-disable">Disconnect your Tumblr account</a></li>
     <% end %>
   </ul>
 
@@ -31,3 +39,6 @@
   <form action="/sources/add-image" method="get">
     <button class="button--red button--red-hover">Force Upload</button>	
   </form>
+
+
+<a href="/tumblr-testing">Test tumblr access</a>
